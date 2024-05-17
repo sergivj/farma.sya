@@ -3,6 +3,7 @@
 import {useRouter} from 'next/navigation';
 import {useState} from "react";
 
+export const fetchCache = "force-no-store";
 const AddPage = () => {
     const router = useRouter();
     const [nombre, setNombre] = useState('')
@@ -27,6 +28,7 @@ const AddPage = () => {
              console.log(nombre, fecha, cantidad)
              const response = fetch('/api/farmasya_add', {
                  method: 'POST',
+                 cache: 'no-store',
                  headers: {
                      'Content-Type': 'application/json',
                  },

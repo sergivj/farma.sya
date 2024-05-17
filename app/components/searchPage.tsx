@@ -3,6 +3,7 @@
 import {useRouter, useSearchParams} from 'next/navigation';
 import {useState} from "react";
 
+export const fetchCache = "force-no-store";
 const SearchPage = ({rows, noTable=false}: any) => {
     const searchParams = useSearchParams();
     const busqueda = searchParams.get('busqueda');
@@ -20,11 +21,13 @@ const SearchPage = ({rows, noTable=false}: any) => {
         try {
             const response = fetch('/api/farmasya', {
                 method: 'POST',
+                cache: 'no-store',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ nombre, type: 'add' }),
             });
+            router.refresh();
         } catch (error) {
             console.log('An error occurred while updating the item');
         }
@@ -34,11 +37,13 @@ const SearchPage = ({rows, noTable=false}: any) => {
          try {
              const response = fetch('/api/farmasya', {
                  method: 'POST',
+                 cache: 'no-store',
                  headers: {
                      'Content-Type': 'application/json',
                  },
                  body: JSON.stringify({ nombre, type: 'substract' }),
              });
+             router.refresh();
          } catch (error) {
              console.log('An error occurred while updating the item');
          }
@@ -82,7 +87,7 @@ const SearchPage = ({rows, noTable=false}: any) => {
                 </tr>
                 </thead>
                 <tbody className='overflow-auto'>
-                {rows.filter((row: any)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row: any) => (
+                {rows.sort((a, b) => a.name.localeCompare(b.name)).filter((row: any)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row: any) => (
                     <tr key={row.name} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row"
                             className="px-6 py-4 text-nowrap text-lg">

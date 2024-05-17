@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from "@vercel/postgres";
+import {useEffect} from "react";
 
 export async function POST(request: NextRequest) {
     const { nombre, type } = await request.json();
