@@ -87,7 +87,7 @@ const SearchPage = ({rows, noTable=false}: any) => {
                 </tr>
                 </thead>
                 <tbody className='overflow-auto'>
-                {rows.sort((a, b) => a.name.localeCompare(b.name)).filter((row: any)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row: any) => (
+                {rows.sort((a: any, b: any) => a.name.localeCompare(b.name)).filter((row: any)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row: any) => (
                     <tr key={row.name} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row"
                             className="px-6 py-4 text-nowrap text-lg">
