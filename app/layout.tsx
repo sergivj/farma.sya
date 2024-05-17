@@ -16,7 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <div className='py-12 lg:px-36 lg:py-36'>
+          <div>
+            <h1 className='flex w-full justify-center text-5xl md:text-[85px] lg:text-[85px] font-extrabold text-blue-500 pb-5'> FarmaSya </h1>
+          </div>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
