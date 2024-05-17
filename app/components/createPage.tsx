@@ -1,6 +1,6 @@
 // app/search/searchPage.tsx
 "use client";
-import {useRouter, useSearchParams} from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import {useState} from "react";
 
 const AddPage = () => {

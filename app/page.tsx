@@ -1,4 +1,9 @@
 "use client";
+
+import {useEffect} from "react";
+
 export default function Home({params}: any) {
-    window.location.href = "/search";
+    useEffect(() => {
+        window.location.href = "/search";
+    }, []);
 }

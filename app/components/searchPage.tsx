@@ -44,6 +44,10 @@ const SearchPage = ({rows, noTable=false}: any) => {
          }
     }
 
+    const handleSetSearch = (e: any) => {
+        setSearch(e.target.value)
+    }
+
     return (
         <div className="relative">
             <div className='w-full flex flex-col gap-4'>
@@ -51,7 +55,7 @@ const SearchPage = ({rows, noTable=false}: any) => {
                     <input
                            className='w-full flex justify-center mb-3 p-2 rounded-md text-black'
                            type={'text'} placeholder={'Buscar...'} name={'busqueda'} defaultValue={busqueda ? busqueda : ''}
-                           onChange={(e) => setSearch(e.preventDefault())}/>
+                           onChange={handleSetSearch} />
                     <button className='flex border border-white w-1/2 justify-center p-1 rounded-lg hover:text-black hover:bg-white' type={'submit'}>Buscar</button>
                 </form>
                 {!noTable ? (
@@ -78,7 +82,7 @@ const SearchPage = ({rows, noTable=false}: any) => {
                 </tr>
                 </thead>
                 <tbody className='overflow-auto'>
-                {rows.filter((row)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row) => (
+                {rows.filter((row: any)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row: any) => (
                     <tr key={row.name} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row"
                             className="px-6 py-4 text-nowrap text-lg">
