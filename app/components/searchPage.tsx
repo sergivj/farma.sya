@@ -91,6 +91,9 @@ const SearchPage = ({rows, noTable=false}: any) => {
                     <th scope="col" className="px-6 py-3 text-lg">
                         Nombre
                     </th>
+                    <th scope="col" className="px-6 py-3 text-lg">
+                        Descripción
+                    </th>
                     <th scope="col" className="px-6 py-3 text-lg text-nowrap">
                         Fecha caducidad
                     </th>
@@ -109,6 +112,9 @@ const SearchPage = ({rows, noTable=false}: any) => {
                             className="px-6 py-4 text-nowrap text-lg">
                             {row.name}
                         </th>
+                        <td className="px-6 py-4 text-nowrap text-lg">
+                            {row.description}
+                        </td>
                         <td className="px-6 py-4 text-nowrap text-lg">
                             {row.fecha_caducidad}
                         </td>

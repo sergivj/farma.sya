@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 export const fetchCache = "force-no-store";
@@ -20,7 +21,9 @@ export default function RootLayout({
       <body>
         <div className='py-12 lg:px-36 lg:py-36'>
           <div>
-            <h1 className='flex w-full justify-center text-5xl md:text-[85px] lg:text-[85px] font-extrabold text-color-secondary pb-5'> FarmaSya </h1>
+            <Link href={'/search'}>
+              <h1 className='flex w-full justify-center text-5xl md:text-[85px] lg:text-[85px] font-extrabold text-color-secondary pb-5'> FarmaSya </h1>
+            </Link>
           </div>
           {children}
         </div>

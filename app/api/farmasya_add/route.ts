@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sql } from "@vercel/postgres";
 
 export async function POST(request: NextRequest) {
-    const { nombre, fecha, cantidad } = await request.json();
-    console.log(nombre, fecha, cantidad)
+    const { nombre, fecha, cantidad, description } = await request.json();
+    console.log(nombre, fecha, cantidad, description)
 
     try {
-        await sql`INSERT INTO FARMASYA VALUES (${nombre}, ${fecha}, ${cantidad})`;
+        await sql`INSERT INTO FARMASYA VALUES (${nombre}, ${fecha}, ${cantidad}, ${description})`;
 
         return NextResponse.json({ message: 'Item created successfully' });
     } catch (error) {
