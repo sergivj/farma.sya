@@ -6,20 +6,40 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --color-bg: #F1F1F2;
+  --color-primary: #A1D6E2;
+  --color-secondary: #1995AD;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #000;
+  background: var(--color-bg);
 
+}
+
+.text-color-primary {
+  color: var(--color-primary);
+}
+
+.text-color-secondary {
+  color: var(--color-secondary);
+}
+
+.border-color-primary {
+  border-color: var(--color-primary);
+}
+
+.border-color-secondary {
+  border-color: var(--color-secondary);
+}
+
+.bg-color-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-color-secondary {
+  background-color: var(--color-secondary);
 }
 
 @layer utilities {

@@ -45,8 +45,24 @@ const SearchPage = ({rows, noTable=false}: any) => {
              });
              router.refresh();
          } catch (error) {
-             console.log('An error occurred while updating the item');
+             console.log('An error occurred while deleting the item');
          }
+    }
+
+    const handleDelete = (nombre: string) => {
+        try {
+            const response = fetch('/api/farmasya', {
+                method: 'POST',
+                cache: 'no-store',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nombre, type: 'delete' }),
+            });
+            router.refresh();
+        } catch (error) {
+            console.log('An error occurred while updating the item');
+        }
     }
 
     const handleSetSearch = (e: any) => {
@@ -58,19 +74,19 @@ const SearchPage = ({rows, noTable=false}: any) => {
             <div className='w-full flex flex-col gap-4'>
                 <form className='w-full flex flex-col px-6 pb-6 items-center justify-center' onSubmit={handleClick}>
                     <input
-                           className='w-full flex justify-center mb-3 p-2 rounded-md text-black'
+                           className='bg-color-primary border border-color-secondary w-2/3 flex justify-center mb-3 p-2 rounded-md text-black font-bold placeholder:font-semibold placeholder-black'
                            type={'text'} placeholder={'Buscar...'} name={'busqueda'} defaultValue={busqueda ? busqueda : ''}
                            onChange={handleSetSearch} />
-                    <button className='flex border border-white w-1/2 justify-center p-1 rounded-lg hover:text-black hover:bg-white' type={'submit'}>Buscar</button>
+                    <button className='flex border border-color-secondary w-1/6 justify-center p-2 rounded-lg bg-color-primary hover:bg-[#F1F1F2] font-semibold' type={'submit'}>Buscar</button>
                 </form>
                 {!noTable ? (
-                    <button className='mb-4 mx-4 flex border border-white w-1/2 justify-center p-1 rounded-lg hover:text-black hover:bg-white' type={'submit'} onClick={handleCreate}>+ Añadir medicamento</button>
+                    <button className='mb-4  flex border border-color-secondary md:w-1/5 lg:w-1/5 w-1/2 justify-center p-2 rounded-lg bg-color-primary hover:bg-[#F1F1F2] font-semibold' type={'submit'} onClick={handleCreate}>+ Añadir medicamento</button>
                 ) : null}
             </div>
             {!noTable ? (
                 <div className='overflow-auto'>
-                <table className="w-screen text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table className="w-screen text-sm text-left rtl:text-right text-black border-y-2 border-color-secondary">
+                <thead className="text-xs text-black uppercase bg-color-primary ">
                 <tr>
                     <th scope="col" className="px-6 py-3 text-lg">
                         Nombre
@@ -88,7 +104,7 @@ const SearchPage = ({rows, noTable=false}: any) => {
                 </thead>
                 <tbody className='overflow-auto'>
                 {rows.sort((a: any, b: any) => a.name.localeCompare(b.name)).filter((row: any)=>(busqueda ? row.name.toLowerCase() == busqueda.toLowerCase() : true)).map((row: any) => (
-                    <tr key={row.name} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr key={row.name} className={`border-b ${row.cantidad <= 0 ? 'bg-red-300' : 'bg-white'} `}>
                         <th scope="row"
                             className="px-6 py-4 text-nowrap text-lg">
                             {row.name}
@@ -100,8 +116,9 @@ const SearchPage = ({rows, noTable=false}: any) => {
                             {row.cantidad}
                         </td>
                         <td className="px-6 py-4 flex gap-6">
-                            <button className='text-nowrap text-lg' type={'button'} onClick={() => handleAdd(row.name)}>Añadir 1</button>
-                            <button className='text-nowrap text-lg' type={'button'} onClick={() => handleSubstract(row.name)}>Restar 1</button>
+                            <button className='text-nowrap text-lg rounded border border-black px-2' type={'button'} onClick={() => handleAdd(row.name)}>Añadir 1</button>
+                            <button className='text-nowrap text-lg rounded border border-black px-2' type={'button'} onClick={() => handleSubstract(row.name)}>Restar 1</button>
+                            <button className='text-nowrap text-lg rounded border border-black px-2 bg-red-600 text-white' type={'button'} onClick={() => handleDelete(row.name)}>Eliminar</button>
                         </td>
                     </tr>
                 ))}

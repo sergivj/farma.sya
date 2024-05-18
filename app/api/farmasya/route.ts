@@ -15,6 +15,10 @@ export async function POST(request: NextRequest) {
             await sql`UPDATE FARMASYA SET cantidad = cantidad - 1 WHERE name = ${nombre}`;
         }
 
+        else if (type === 'delete') {
+            await sql`DELETE FROM FARMASYA WHERE name = ${nombre}`;
+        }
+
         return NextResponse.json({ message: 'Item updated successfully' });
     } catch (error) {
         console.error('Error al actualizar la cantidad:', error);
